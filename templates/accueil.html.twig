@@ -1,11 +1,31 @@
 {% extends 'base.html.twig' %}
-        {% block body %}
 
-<!DOCTYPE html>
-<html>
+{% block title %}Accueil | TechShop{% endblock %}
 
-  
-    <body>
-    </body>
-</html>
+{% block body %}
+<main class="home">
+    <section class="home-hero" aria-labelledby="home-title">
+        <h1 class="home-eyebrow">Bienvenue chez TechShop</h1>
+        <h2 id="home-title">La technologie qui vous ressemble.</h2>
+        <p class="home-lead">Explorez une sélection d’équipements et d’accessoires pour travailler, créer et profiter pleinement de vos appareils.</p>
+        <a class="home-button" href="{{ path('catalogue') }}">Découvrir le catalogue</a>
+    </section>
+
+    <section class="home-highlights" aria-label="Les engagements TechShop">
+        <article class="home-card">
+            <h2>Un choix simple</h2>
+            <p>Retrouvez vos essentiels tech dans un catalogue clair, pensé pour vous aider à choisir.</p>
+        </article>
+        <article class="home-card">
+            <h2>Des conseils utiles</h2>
+            <p>Comparez les caractéristiques et trouvez l’équipement adapté à vos besoins.</p>
+        </article>
+        <article class="home-card">
+            <h2>À votre écoute</h2>
+            <p>Notre équipe est là pour vous accompagner avant et après votre achat.</p>
+            <a class="home-button" href="{{ path('contact') }}">Nous contacter</a>
+
+        </article>
+    </section>
+</main>
 {% endblock %}

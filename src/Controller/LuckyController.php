@@ -7,13 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LuckyController extends AbstractController
 {
-    #[Route('/', name: 'default')]
+    #[Route('/', name: 'accueil')]
     public function number(): Response
     {
-        $number = random_int(0, 100);
-
-        return $this->render('accueil.html.twig', [
-            'number' => $number,
-        ]);
+        return $this->render('accueil.html.twig');
     }
 }
