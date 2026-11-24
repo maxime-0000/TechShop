@@ -10,5 +10,9 @@
         <p>Découvrez une sélection de produits high-tech pour vous accompagner au quotidien. Que vous cherchiez un nouvel appareil, un accessoire pratique ou une idée cadeau, trouvez l’équipement qui vous correspond.</p>
         <p>Prenez le temps de comparer les caractéristiques et choisissez en toute simplicité. Notre équipe reste à votre écoute pour vous aider à faire le bon choix.</p>
     </section>
+    <section id="catalogue" data-catalogue data-api-url="{{ path('api_produits') }}" aria-label="Produits du catalogue">
+        <p data-catalogue-status role="status" aria-live="polite">Chargement du catalogue…</p>
+        <div class="catalogue-grid" data-catalogue-results></div>
+    </section>
 </main>
 {% endblock %}
