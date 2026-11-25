@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Catalogue | TechShop{% endblock %}
@@ -10,38 +9,17 @@
         <p>Découvrez une sélection de produits high-tech pour vous accompagner au quotidien. Que vous cherchiez un nouvel appareil, un accessoire pratique ou une idée cadeau, trouvez l’équipement qui vous correspond.</p>
         <p>Prenez le temps de comparer les caractéristiques et choisissez en toute simplicité. Notre équipe reste à votre écoute pour vous aider à faire le bon choix.</p>
     </section>
-    <section aria-label="Produits du catalogue">
-        {% if produits is empty %}
-            <p>Aucun produit n’est disponible pour le moment.</p>
-        {% else %}
-            <div class="catalogue-grid">
-                {% for produit in produits %}
-                    <article class="carte">
-                        {% if produit.imageUrl %}
-                            <img
-                                class="carte-image"
-                                src="{{ produit.imageUrl }}"
-                                alt="Image du produit {{ produit.nom }}"
-                                loading="lazy"
-                                referrerpolicy="no-referrer"
-                            >
-                        {% endif %}
 
-                        <h2>{{ produit.nom }}</h2>
-                        <p class="carte-description">{{ produit.description }}</p>
-                        <p class="carte-prix">{{ produit.prix|number_format(2, ',', ' ') }} €</p>
+    <section id="catalogue"
+             data-catalogue
+             data-api-url="{{ path('api_produits') }}"
+             data-panier-url="{{ path('panier_ajouter', {id: 0}) }}"
+             data-csrf-token="{{ csrf_token('panier') }}"
+             aria-label="Produits du catalogue">
 
-                        <p class="carte-stock" data-out-of-stock="{{ produit.quantite <= 0 ? 'true' : 'false' }}">
-                            {% if produit.quantite > 0 %}
-                                {{ produit.quantite }} en stock
-                            {% else %}
-                                Rupture de stock
-                            {% endif %}
-                        </p>
-                    </article>
-                {% endfor %}
-            </div>
-        {% endif %}
+        <p data-catalogue-status role="status" aria-live="polite">Chargement du catalogue…</p>
+        <div class="catalogue-grid" data-catalogue-results></div>
+
     </section>
 </main>
 {% endblock %}
