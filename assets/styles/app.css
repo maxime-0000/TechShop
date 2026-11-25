@@ -93,6 +93,14 @@ body {
     line-height: 1.5;
 }
 
+.carte-prix,
+.carousel-price {
+    margin: 0 0 18px;
+    color: #1025db;
+    font-size: 1.35rem;
+    font-weight: 750;
+}
+
 .carte-stock {
     display: inline-block;
     margin: 0;
