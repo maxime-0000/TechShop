@@ -107,4 +107,3 @@ document.querySelectorAll("[data-product-carousel]").forEach((carousel) => {
     }
     startAutoplay();
 });
-

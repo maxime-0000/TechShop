@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Catalogue | TechShop{% endblock %}
@@ -38,6 +37,13 @@
                                 Rupture de stock
                             {% endif %}
                         </p>
+
+                        {% if produit.quantite > 0 %}
+                            <form method="post" action="{{ path('panier_ajouter', {id: produit.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('panier') }}">
+                                <button class="btn btn-primary" type="submit">Ajouter au panier</button>
+                            </form>
+                        {% endif %}
                     </article>
                 {% endfor %}
             </div>
