@@ -37,6 +37,10 @@
                             {{ produit.description }}
                         </p>
 
+                        <p class="carousel-price">
+                            {{ produit.prix|number_format(2, ',', ' ') }} €
+                        </p>
+
                         <p class="carousel-stock">
 
                             {% if produit.quantite > 0 %}

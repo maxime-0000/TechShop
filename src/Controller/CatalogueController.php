@@ -35,6 +35,7 @@ class CatalogueController extends AbstractController
             'quantite' => $produit->getQuantite(),
             'description' => $produit->getDescription(),
             'imageUrl' => $produit->getImageUrl(),
+            'prix' => $produit->getPrix(),
         ], $produits);
 
         return $this->json($resultats);

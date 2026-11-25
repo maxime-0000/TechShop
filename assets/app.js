@@ -144,9 +144,10 @@ async function chargerCatalogue(catalogue) {
         }
 
         afficherProduits(produits, resultats);
-        statut.textContent = produits.length === 0
-            ? "Aucun produit n’est disponible pour le moment."
-            : `${produits.length} produit(s) affiché(s).`;
+        statut.textContent =
+            produits.length === 0
+                ? "Aucun produit n’est disponible pour le moment."
+                : `${produits.length} produit(s) affiché(s).`;
     } catch (erreur) {
         console.error("Erreur lors du chargement du catalogue :", erreur);
         resultats.replaceChildren();
@@ -166,7 +167,9 @@ function afficherProduits(produits, conteneur) {
             const image = document.createElement("img");
             image.className = "carte-image";
             image.src = produit.imageUrl;
-            image.alt = produit.nom ? `Image du produit ${produit.nom}` : "Image du produit";
+            image.alt = produit.nom
+                ? `Image du produit ${produit.nom}`
+                : "Image du produit";
             image.loading = "lazy";
             image.referrerPolicy = "no-referrer";
             carte.append(image);
@@ -178,16 +181,24 @@ function afficherProduits(produits, conteneur) {
 
         const description = document.createElement("p");
         description.className = "carte-description";
-        description.textContent = produit.description ?? "Aucune description disponible.";
+        description.textContent =
+            produit.description ?? "Aucune description disponible.";
         carte.append(description);
+
+        const prix = document.createElement("p");
+        prix.className = "carte-prix";
+        prix.textContent = new Intl.NumberFormat("fr-FR", {
+            style: "currency",
+            currency: "EUR",
+        }).format(Number(produit.prix));
+        carte.append(prix);
 
         const stock = document.createElement("p");
         stock.className = "carte-stock";
         const quantite = Number(produit.quantite ?? 0);
         stock.dataset.outOfStock = String(quantite <= 0);
-        stock.textContent = quantite > 0
-            ? `${quantite} en stock`
-            : "Rupture de stock";
+        stock.textContent =
+            quantite > 0 ? `${quantite} en stock` : "Rupture de stock";
         carte.append(stock);
 
         conteneur.append(carte);
