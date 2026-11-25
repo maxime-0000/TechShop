@@ -3,68 +3,228 @@
 {% block title %}Accueil | TechShop{% endblock %}
 
 {% block body %}
-<main class="home">
-    <section class="product-carousel" data-product-carousel aria-roledescription="carrousel" aria-label="Produits à découvrir">
+
+<main class="home container py-5">
+
+    {# Carrousel des produits #}
+    <section class="product-carousel mb-5"
+             data-product-carousel
+             aria-roledescription="carrousel"
+             aria-label="Produits à découvrir">
+
         <div class="carousel-slides" aria-live="off">
+
             {% for produit in produits %}
-                <article class="carousel-slide{% if loop.first %} is-active{% endif %}" data-carousel-slide role="group" aria-roledescription="diapositive" {% if not loop.first %}hidden{% endif %} aria-label="Diapositive {{ loop.index }} sur {{ produits|length }}">
+
+                <article class="carousel-slide{% if loop.first %} is-active{% endif %}"
+                         data-carousel-slide
+                         role="group"
+                         aria-roledescription="diapositive"
+                         {% if not loop.first %}hidden{% endif %}
+                         aria-label="Diapositive {{ loop.index }} sur {{ produits|length }}">
+
                     <div class="carousel-copy">
-                        <p class="carousel-eyebrow">La sélection TechShop</p>
-                        <h1>{{ produit.nom }}</h1>
-                        <p class="carousel-description">Un produit à découvrir dans notre catalogue.</p>
-                        <p class="carousel-stock">
-                            {% if produit.quantite > 0 %}
-                                {{ produit.quantite }} disponible{{ produit.quantite > 1 ? 's' : '' }} en stock
-                            {% else %}
-                                Indisponible actuellement
-                            {% endif %}
+
+                        <p class="carousel-eyebrow text-uppercase font-weight-bold">
+                            La sélection TechShop
                         </p>
-                        <a class="carousel-cta" href="{{ path('catalogue') }}">Je découvre</a>
+
+                        <h1 class="display-4 font-weight-bold">
+                            {{ produit.nom }}
+                        </h1>
+
+                        <p class="carousel-description lead">
+                            Un produit à découvrir dans notre catalogue.
+                        </p>
+
+                        <p class="carousel-stock">
+
+                            {% if produit.quantite > 0 %}
+
+                                <span class="badge badge-success p-2">
+                                    {{ produit.quantite }}
+                                    disponible{{ produit.quantite > 1 ? 's' : '' }} en stock
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge badge-danger p-2">
+                                    Indisponible actuellement
+                                </span>
+
+                            {% endif %}
+
+                        </p>
+
+                        <a class="carousel-cta btn btn-primary btn-lg"
+                           href="{{ path('catalogue') }}">
+                            Je découvre
+                        </a>
+
                     </div>
+
                     <div class="carousel-art" aria-hidden="true">
                         <span>{{ produit.nom|first|upper }}</span>
                         <small>TECHSHOP</small>
                     </div>
+
                 </article>
+
             {% else %}
-                <article class="carousel-slide is-active" data-carousel-slide role="group" aria-roledescription="diapositive">
+
+                <article class="carousel-slide is-active"
+                         data-carousel-slide
+                         role="group"
+                         aria-roledescription="diapositive">
+
                     <div class="carousel-copy">
-                        <p class="carousel-eyebrow">Bienvenue chez TechShop</p>
-                        <h1>La technologie qui vous ressemble.</h1>
-                        <p class="carousel-description">Retrouvez bientôt ici nos produits à découvrir.</p>
-                        <a class="carousel-cta" href="{{ path('catalogue') }}">Découvrir le catalogue</a>
+
+                        <p class="carousel-eyebrow text-uppercase font-weight-bold">
+                            Bienvenue chez TechShop
+                        </p>
+
+                        <h1 class="display-4 font-weight-bold">
+                            La technologie qui vous ressemble.
+                        </h1>
+
+                        <p class="carousel-description lead">
+                            Retrouvez bientôt ici nos produits à découvrir.
+                        </p>
+
+                        <a class="carousel-cta btn btn-primary btn-lg"
+                           href="{{ path('catalogue') }}">
+                            Découvrir le catalogue
+                        </a>
+
                     </div>
-                    <div class="carousel-art" aria-hidden="true"><span>T</span><small>TECHSHOP</small></div>
+
+                    <div class="carousel-art" aria-hidden="true">
+                        <span>T</span>
+                        <small>TECHSHOP</small>
+                    </div>
+
                 </article>
+
             {% endfor %}
+
         </div>
 
         {% if produits|length > 1 %}
-            <button class="carousel-arrow carousel-previous" type="button" data-carousel-previous aria-label="Diapositive précédente">‹</button>
-            <button class="carousel-arrow carousel-next" type="button" data-carousel-next aria-label="Diapositive suivante">›</button>
-            <div class="carousel-status" aria-label="Lecture du carrousel">
-                <span><span data-carousel-current>1</span> / {{ produits|length }}</span>
-                <button class="carousel-toggle" type="button" data-carousel-toggle aria-label="Mettre le carrousel en pause" aria-pressed="false">
-                    <span data-carousel-toggle-icon aria-hidden="true">Ⅱ</span>
+
+            <button class="carousel-arrow carousel-previous"
+                    type="button"
+                    data-carousel-previous
+                    aria-label="Diapositive précédente">
+                ‹
+            </button>
+
+            <button class="carousel-arrow carousel-next"
+                    type="button"
+                    data-carousel-next
+                    aria-label="Diapositive suivante">
+                ›
+            </button>
+
+            <div class="carousel-status"
+                 aria-label="Lecture du carrousel">
+
+                <span>
+                    <span data-carousel-current>1</span>
+                    / {{ produits|length }}
+                </span>
+
+                <button class="carousel-toggle"
+                        type="button"
+                        data-carousel-toggle
+                        aria-label="Mettre le carrousel en pause"
+                        aria-pressed="false">
+
+                    <span data-carousel-toggle-icon aria-hidden="true">
+                        Ⅱ
+                    </span>
+
                 </button>
+
             </div>
+
         {% endif %}
+
     </section>
 
-    <section class="home-highlights" aria-label="Les engagements TechShop">
-        <article class="home-card">
-            <h2>Un choix simple</h2>
-            <p>Retrouvez vos essentiels tech dans un catalogue clair, pensé pour vous aider à choisir.</p>
-        </article>
-        <article class="home-card">
-            <h2>Des conseils utiles</h2>
-            <p>Comparez les caractéristiques et trouvez l’équipement adapté à vos besoins.</p>
-        </article>
-        <article class="home-card">
-            <h2>À votre écoute</h2>
-            <p>Notre équipe est là pour vous accompagner avant et après votre achat.</p>
-            <a class="home-button" href="{{ path('contact') }}">Nous contacter</a>
-        </article>
+
+    {# Les engagements TechShop #}
+    <section class="row" aria-label="Les engagements TechShop">
+
+        <div class="col-12 col-md-4 mb-4">
+
+            <article class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h2 class="card-title h4">
+                        Un choix simple
+                    </h2>
+
+                    <p class="card-text text-muted">
+                        Retrouvez vos essentiels tech dans un catalogue
+                        clair, pensé pour vous aider à choisir.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+
+            <article class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h2 class="card-title h4">
+                        Des conseils utiles
+                    </h2>
+
+                    <p class="card-text text-muted">
+                        Comparez les caractéristiques et trouvez
+                        l’équipement adapté à vos besoins.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="col-12 col-md-4 mb-4">
+
+            <article class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <h2 class="card-title h4">
+                        À votre écoute
+                    </h2>
+
+                    <p class="card-text text-muted">
+                        Notre équipe est là pour vous accompagner
+                        avant et après votre achat.
+                    </p>
+
+                    <a class="btn btn-outline-primary"
+                       href="{{ path('contact') }}">
+                        Nous contacter
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
     </section>
+
 </main>
+
 {% endblock %}
