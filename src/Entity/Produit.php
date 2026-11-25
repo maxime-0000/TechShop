@@ -19,6 +19,12 @@ class Produit
     #[ORM\Column]
     private ?int $quantite = null;
 
+    #[ORM\Column(length: 1000, options: ['default' => ''])]
+    private string $description = '';
+
+    #[ORM\Column(length: 2048, nullable: true)]
+    private ?string $imageUrl = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,30 @@ class Produit
     public function setQuantite(int $quantite): static
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(?string $imageUrl): static
+    {
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }

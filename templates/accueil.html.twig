@@ -34,7 +34,7 @@
                         </h1>
 
                         <p class="carousel-description lead">
-                            Un produit à découvrir dans notre catalogue.
+                            {{ produit.description }}
                         </p>
 
                         <p class="carousel-stock">
@@ -64,8 +64,12 @@
                     </div>
 
                     <div class="carousel-art" aria-hidden="true">
-                        <span>{{ produit.nom|first|upper }}</span>
-                        <small>TECHSHOP</small>
+                        {% if produit.imageUrl %}
+                            <img class="carousel-product-image" src="{{ produit.imageUrl }}" alt="" loading="lazy" referrerpolicy="no-referrer">
+                        {% else %}
+                            <span>{{ produit.nom|first|upper }}</span>
+                            <small>TECHSHOP</small>
+                        {% endif %}
                     </div>
 
                 </article>

@@ -162,9 +162,24 @@ function afficherProduits(produits, conteneur) {
         const carte = document.createElement("article");
         carte.className = "carte";
 
+        if (produit.imageUrl) {
+            const image = document.createElement("img");
+            image.className = "carte-image";
+            image.src = produit.imageUrl;
+            image.alt = produit.nom ? `Image du produit ${produit.nom}` : "Image du produit";
+            image.loading = "lazy";
+            image.referrerPolicy = "no-referrer";
+            carte.append(image);
+        }
+
         const titre = document.createElement("h2");
         titre.textContent = produit.nom ?? "Produit sans nom";
         carte.append(titre);
+
+        const description = document.createElement("p");
+        description.className = "carte-description";
+        description.textContent = produit.description ?? "Aucune description disponible.";
+        carte.append(description);
 
         const stock = document.createElement("p");
         stock.className = "carte-stock";
