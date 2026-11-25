@@ -201,6 +201,25 @@ function afficherProduits(produits, conteneur) {
             quantite > 0 ? `${quantite} en stock` : "Rupture de stock";
         carte.append(stock);
 
+        const catalogue = document.querySelector("[data-catalogue]");
+
+        const formulaire = document.createElement("form");
+        formulaire.method = "POST";
+        formulaire.action = catalogue.dataset.panierUrl.replace(/\/0$/, `/${produit.id}`);
+
+        const token = document.createElement("input");
+        token.type = "hidden";
+        token.name = "_token";
+        token.value = catalogue.dataset.csrfToken;
+
+        const bouton = document.createElement("button");
+        bouton.type = "submit";
+        bouton.className = "btn btn-primary";
+        bouton.textContent = "Ajouter au panier";
+
+        formulaire.append(token, bouton);
+        carte.append(formulaire);
+
         conteneur.append(carte);
     }
 }
