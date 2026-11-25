@@ -166,9 +166,14 @@ function afficherProduits(produits, conteneur) {
         titre.textContent = produit.nom ?? "Produit sans nom";
         carte.append(titre);
 
-        const quantite = document.createElement("p");
-        quantite.textContent = `Quantité en stock : ${produit.quantite ?? 0}`;
-        carte.append(quantite);
+        const stock = document.createElement("p");
+        stock.className = "carte-stock";
+        const quantite = Number(produit.quantite ?? 0);
+        stock.dataset.outOfStock = String(quantite <= 0);
+        stock.textContent = quantite > 0
+            ? `${quantite} en stock`
+            : "Rupture de stock";
+        carte.append(stock);
 
         conteneur.append(carte);
     }
